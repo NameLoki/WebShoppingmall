@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>웹쇼핑모루</title>
+        <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+        <script>
+            function test() {
+                tt2();
+            }
+
+            async function tt2() {
+                let data = await $.get('/api/menu');
+                if(data != null) {
+                    $('#test').html(JSON.stringify(data));
+                }
+            }
+
+            function tt1() {
+                $.ajax({ 
+                    type: "POST",
+                    url : "/api/menu",
+                    contentType:"application/json",
+
+                    data: JSON.stringify({
+                    account:'testId',
+                    password:'testps',
+                    userName:'TESTUSER',
+                    tel:'wdf',
+                    phone:'010',
+                    zipCode:'nani',
+                    email:'@dgsw',
+                }),
+                    success : function(user) {
+                        if(user != '') {
+                            alert('회원가입 완료');
+                            updatePage();
+                        } else {
+                            alert('이미 있는 계정');
+                        }
+                    },
+                    error: function(user) {
+                         alert('회원가입 실패');
+                        } 
+                    });
+            }
+
+            function t3() {
+                $.ajax({
+                    type: "delete",
+                    url : "/api/user",
+                    dataType: 'text',
+                    data:'1',
+                    success : function(res) {
+                        if(res) {
+                            alert('삭제 완료');
+                            updateEndPost();
+                        } else {
+                            alert('실패');
+                        }
+                    },
+                    error: function(res) {
+                         alert('삭제 실패');
+                        } 
+                    });
+            }
+
+            async function t2() {
+                let data = await $.get('/api/user/id?id=' + 1);
+                if(data != null) {
+                    $('#test').html(JSON.stringify(data));
+                }
+            }
+
+
+
+            function t1() {
+                $.ajax({ 
+                    type: "POST",
+                    url : "/api/user",
+                    contentType:"application/json",
+
+                    data: JSON.stringify({
+                    account:'testId',
+                    password:'testps',
+                    userName:'TESTUSER',
+                    tel:'wdf',
+                    phone:'010',
+                    zipCode:'nani',
+                    email:'@dgsw',
+                }),
+                    success : function(user) {
+                        if(user != '') {
+                            alert('회원가입 완료');
+                            updatePage();
+                        } else {
+                            alert('이미 있는 계정');
+                        }
+                    },
+                    error: function(user) {
+                         alert('회원가입 실패');
+                        } 
+                    });
+            }
+        </script>
+    </head>
+    <body>
+        <button onclick="test();">눌러봐요</button>
+        <div id="test"></div>
+        <script src="../"></script>
+    </body>
+</html>
