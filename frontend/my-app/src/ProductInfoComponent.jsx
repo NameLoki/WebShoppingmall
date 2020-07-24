@@ -13,7 +13,7 @@ class ProductInfoComponent extends Component {
     render() {
         const {id, name, price} = this.props.info;
 
-        const api = "/product/" + id;
+        const api = "/menu/product/" + id;
 
         return(
             <>

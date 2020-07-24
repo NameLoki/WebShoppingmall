@@ -2,6 +2,9 @@ package com.dgsw.web_shoppingmall.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.dgsw.web_shoppingmall.domain.User;
 import com.dgsw.web_shoppingmall.service.interfaces.UserService;
 
@@ -9,12 +12,15 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @RestController
+@SessionAttributes("user")
 public class UserController {
 
     @Autowired
@@ -51,7 +57,20 @@ public class UserController {
     }
 
     @PostMapping(value = "/api/user/login")
-    public User login(@RequestBody User user) {
-        return userService.login(user);
+    public User login(HttpSession session,  @RequestBody User user) {
+        User u = userService.login(user);
+        if(u != null) {
+            session.setAttribute("id", u.getId());
+        }
+        return u;
+    }
+
+    @GetMapping(value = "/api/user/session")
+    public boolean checkSession(HttpSession session) {
+        if(session.getAttribute("id") != null) {
+            return true;
+        }
+
+        return false;
     }
 }

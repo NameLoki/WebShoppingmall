@@ -5,6 +5,7 @@ import './App.css';
 
 import TopMenuComponent from './TopMenuComponent';
 import MenuComponent from './MenuComponent';
+import BodyCompoent from './BodyComponent';
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
       <>
         <TopMenuComponent>
         </TopMenuComponent>
+        <BodyCompoent>
+        </BodyCompoent>
       </>
     </div>
   );

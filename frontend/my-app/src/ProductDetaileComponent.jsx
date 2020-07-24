@@ -7,14 +7,22 @@ const {useState, useRef} = React;
 
 const ProductDetaileComponent = ({match}) => {
 
-    const [id, setId] = useState('');
-    const [name, setName] = useState('');
-    const [price, setPrice] = useState('');
-    const [menuId, setMenuId] = useState('');
-    const [details, setDetails] = useState('');
-    const [factory, setFactory] = useState('');
+    const nameTag = '이름 : ';
+    const idTag = '상품 번호 : ';
+    const priceTag = '가격 : '
+    const menuIdTag = '상품분류 : ';
+    const detailsTag = '';
+    const factoryTag = '제조사 : ';
+    const releaseTag = '발행일 : ';
+
+    const [id, setId] = useState(nameTag);
+    const [name, setName] = useState(idTag);
+    const [price, setPrice] = useState(priceTag);
+    const [menuId, setMenuId] = useState(menuIdTag);
+    const [details, setDetails] = useState(detailsTag);
+    const [factory, setFactory] = useState(factoryTag);
     const [sale, setSale] = useState('');
-    const [release, setRelease] = useState('');
+    const [release, setRelease] = useState(releaseTag);
     const [hit, setHit] = useState('');
 
     const getProduct = () => {
@@ -22,16 +30,15 @@ const ProductDetaileComponent = ({match}) => {
         .then(res => {
             console.log(res);
             let product = res.data;
-            setName('이름 : ' + product.name);
-            setId('상품 번호 : ' + product.id);
-            setPrice('가격 : ' + product.price + '원');
-            setFactory('제조사 : ' + product.factory);
-            setRelease('발행일 : ' + product.releaseDate);
-            setDetails(product.details);
-
+            setName(nameTag + product.name);
+            setId(idTag + product.id);
+            setPrice(priceTag + product.price + '원');
+            setFactory(factoryTag + product.factory);
+            setRelease(releaseTag + product.releaseDate);
+            setDetails(detailsTag + product.details);
         })
         .catch(res => {
-            console.error(res);
+            console.error('로드실패');
         })
     }
 
