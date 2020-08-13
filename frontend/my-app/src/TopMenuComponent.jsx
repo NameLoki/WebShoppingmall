@@ -15,9 +15,6 @@ class TopMenuComponent extends Component {
             },
             user:false,
         }
-    }
-
-    componentDidMount() {
         this.getSession();
     }
 
